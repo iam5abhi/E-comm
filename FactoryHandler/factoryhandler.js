@@ -42,7 +42,7 @@ exports.Add =Model=>{
     return async(req,res,next)=>{
        const newdata =new Model(req.body)
        newdata.save((err,data)=>{
-         if(err) 
+         if(err) return next(new Error("Data is not Availble",400));
          res.status(200).send({message:"Add sucessfully",data:data})
        })
     }
