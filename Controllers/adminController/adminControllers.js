@@ -5,6 +5,7 @@ const FactoryHandler =require('../../FactoryHandler/factoryhandler')
 const base64=require('base-64')
 const {REGISTRATION_SUCCESS,PASSWORD_NOT_MATCH,COMPARE_PASSWORD_USING_DB,LOGIN_SUCCESS,USER_ALREADY_EXIST} =require('../../ConstandMessage/Message')
 const Category =require('../../Models/category/category')
+const SubCategory =require('../../Models/category/subcategory')
 const createSendToken=require('../../suscribers/createSendToken')
 
 
@@ -66,3 +67,50 @@ exports.EditCategory=FactoryHandler.updateOne(Category)
 exports.UpdateStatus=FactoryHandler.updateOne(Category)
 exports.getCategory=FactoryHandler.getOne(Category)
 
+
+
+//SubCategory
+exports.AddSubCategory=async(req,res,next)=>{
+   const  data =[];
+   const arr =req.body.subcategory
+   for(let i=0;i<=arr.length-1;i++)
+   { 
+      const subcategory={
+          categoryId:req.query.id,
+          name:arr[i].name
+      }
+      data.push(subcategory)
+   }
+ const subcategory =await SubCategory.create(data)
+  if(!subcategory) return next(new Error('data not be added'))
+  res.status(200).send({message:"sub category add sucess fully"});
+}
+
+exports.getAllCategoryofSubcategory=(req,res,next)=>{
+   SubCategory.find({},function(err,data){
+      if(err) return next(new Error(`${err.message}`,500))
+      res.status(200).send({data:data})
+   })
+}
+
+exports.getAllSubcategory=(req,res,next)=>{
+   SubCategory.find({categoryId:req.params.id},function(err,data){
+      if(err) return next(new Error(`${err.message}`,500))
+      res.status(200).send({data:data})
+   })
+}
+
+exports.EditSubcategory =async(req,res,next)=>{
+   SubCategory.findOneAndUpdate({_id:req.params.id},{name:req.body.name},function(err,data){
+        if(err) return next(new Error(err.message))
+        res.status(200).send({message:"subcategroy data change Sucessfull",data:data})
+    })
+}
+
+
+exports.deleteSubcategory =async(req,res,next)=>{
+   SubCategory.findOneAndUpdate({_id:req.params.id},{status:req.body.status},function(err,data){
+       if(err) return next(new Error(err.message))
+       res.status(200).send({message:"subcategroy data change Sucessfull",data:data})
+   })
+}
