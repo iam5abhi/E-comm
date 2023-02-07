@@ -8,6 +8,8 @@ const Category =require('../../Models/category/category')
 const SubCategory =require('../../Models/category/subcategory')
 const createSendToken=require('../../suscribers/createSendToken')
 
+const Product=require('../../Models/Product/Product')
+
 
 exports.CreateAccount = (req, res, next) => {
    //Comparing The Password and confirmpassword
@@ -114,3 +116,11 @@ exports.deleteSubcategory =async(req,res,next)=>{
        res.status(200).send({message:"subcategroy data change Sucessfull",data:data})
    })
 }
+
+
+
+//Product
+exports.AddProducts=FactoryHandler.Add(Product)
+exports.getAllProducts=FactoryHandler.getAll(Product)
+exports.EditProducts=FactoryHandler.updateOne(Product)
+exports.getProducts=FactoryHandler.getOne(Product)

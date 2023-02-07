@@ -22,6 +22,19 @@ adminrouter.route('/status/:id').patch(admin.UpdateStatus)
 adminrouter.route('/get-category/:id').get(admin.getCategory)
 
 
+//SubCategory
+adminrouter.route('/add-subcategory').patch(admin.AddSubCategory)
+adminrouter.route('/subcategory/:id').get(admin.getAllSubcategory)
+adminrouter.route('/subcategory').get(admin.getAllCategoryofSubcategory)
+adminrouter.route('/edit-subcategory/:id').patch(admin.EditSubcategory)
+adminrouter.route('/update-subcategory-status/:id').patch(admin.deleteSubcategory)
+
+
+adminrouter.route('/product').post(admin.AddProducts).get(admin.getAllProducts)
+
+adminrouter.route('/product/:id').get(admin.getProducts).patch(admin.EditProducts)
+
+
 
 
 
