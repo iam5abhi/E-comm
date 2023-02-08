@@ -1,10 +1,16 @@
 const { ServerDescription } = require('mongodb')
 const mongoose = require('mongoose')
+const SubCategory =require('../category/subcategory')
 
 
 const Schema = mongoose.Schema
 
 const ProductSchema = mongoose.Schema({
+    subCategoryId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:SubCategory,
+        require:true
+       },
     productName:{
         type:String,
         required:true
@@ -23,6 +29,12 @@ const ProductSchema = mongoose.Schema({
     productImage:{
         type:String,
         required:true 
+    },
+    status:{
+        type:String,
+        required:true,
+        enum:['enable','disable'],
+        default:'enable'
     }
 
 },{ timestamps:true})

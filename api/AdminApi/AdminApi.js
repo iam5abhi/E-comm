@@ -31,8 +31,9 @@ adminrouter.route('/update-subcategory-status/:id').patch(admin.deleteSubcategor
 
 
 adminrouter.route('/product').post(admin.AddProducts).get(admin.getAllProducts)
-
 adminrouter.route('/product/:id').get(admin.getProducts).patch(admin.EditProducts)
+
+adminrouter.route('/product-status/:id').patch(admin.updateProductStaus)
 
 
 
